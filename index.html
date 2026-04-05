@@ -4,35 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HayatID - L'identité médicale portable du Maroc</title>
-    
-    <!-- Fonts: Syne (Headings) & DM Sans (Body) -->
+
+    <!-- Fonts: Syne (Headings), DM Sans (Body), Space Mono (Numbers), IBM Plex Sans Arabic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=IBM+Plex+Sans+Arabic:wght@400;600&family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Tailwind Config - BLUE PALETTE -->
+    <!-- Tailwind Config - EMERALD/BLUE/ORANGE PALETTE -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         bgDark: '#060A12',
-                        primary: '#3B82F6',
-                        primaryLight: '#60A5FA',
-                        primaryDark: '#1D4ED8',
-                        cyan: '#06B6D4',
+                        bgCard: '#0D1117',
+                        bgHover: '#161B22',
+                        emerald: '#00E5A0',
+                        emeraldDark: '#00C48A',
+                        blue: '#0070F3',
+                        orange: '#FFA502',
+                        textPrimary: '#F0F6FC',
+                        textSecondary: '#8B949E',
+                        textTertiary: '#6E7681',
+                        danger: '#FF4757',
                         surface: 'rgba(255, 255, 255, 0.03)',
-                        surfaceBorder: 'rgba(255, 255, 255, 0.08)',
+                        surfaceBorder: 'rgba(240, 246, 252, 0.08)',
+                        surfaceBorderHover: 'rgba(240, 246, 252, 0.15)',
                     },
                     fontFamily: {
                         sans: ['DM Sans', 'sans-serif'],
                         display: ['Syne', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                        arabic: ['IBM Plex Sans Arabic', 'sans-serif'],
                     }
                 }
             }
@@ -42,7 +51,7 @@
     <style>
         body {
             background-color: #060A12;
-            color: #ffffff;
+            color: #F0F6FC;
             overflow-x: hidden;
         }
 
@@ -58,12 +67,12 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        .glow-blue {
-            box-shadow: 0 0 80px -20px rgba(59, 130, 246, 0.4);
+        .glow-emerald {
+            box-shadow: 0 0 80px -20px rgba(0, 229, 160, 0.4);
         }
-        
+
         .text-glow {
-            text-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+            text-shadow: 0 0 30px rgba(0, 229, 160, 0.6);
         }
 
         .reveal {
@@ -82,7 +91,7 @@
             50% { opacity: 0.5; }
             100% { transform: scale(1.3); opacity: 0; }
         }
-        
+
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -91,7 +100,7 @@
         .animate-pulse-ring {
             animation: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
-        
+
         .animate-float {
             animation: float 6s ease-in-out infinite;
         }
@@ -107,19 +116,23 @@
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #3B82F6;
+            background: #00E5A0;
         }
-        
+
         .text-gradient {
-            background: linear-gradient(to right, #3B82F6, #06B6D4);
+            background: linear-gradient(to right, #00E5A0, #0070F3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .glass-card {
-            background: rgba(30, 58, 95, 0.1);
+            background: rgba(13, 17, 23, 0.6);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(240, 246, 252, 0.08);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(240, 246, 252, 0.15);
         }
 
         /* DEMO VIDEO MODAL STYLES - RESPONSIVE */
@@ -145,10 +158,10 @@
             aspect-ratio: 16/9;
             background: linear-gradient(135deg, #0a1628 0%, #060A12 100%);
             border-radius: 16px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(0, 229, 160, 0.2);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 60px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 60px rgba(0, 229, 160, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -209,14 +222,14 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #3B82F6, transparent);
-            box-shadow: 0 0 20px #3B82F6;
+            background: linear-gradient(90deg, transparent, #00E5A0, transparent);
+            box-shadow: 0 0 20px #00E5A0;
             animation: scan-line 2s ease-in-out infinite;
         }
 
         @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
-            50% { box-shadow: 0 0 60px rgba(59, 130, 246, 0.8); }
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 229, 160, 0.5); }
+            50% { box-shadow: 0 0 60px rgba(0, 229, 160, 0.8); }
         }
 
         .pulse-glow {
@@ -225,14 +238,14 @@
 
         .progress-bar {
             height: 3px;
-            background: rgba(59, 130, 246, 0.2);
+            background: rgba(0, 229, 160, 0.2);
             border-radius: 2px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #3B82F6, #06B6D4);
+            background: linear-gradient(90deg, #00E5A0, #0070F3);
             border-radius: 2px;
             transition: width 0.3s ease;
         }
@@ -244,9 +257,9 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: rgba(59, 130, 246, 0.15);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: #3B82F6;
+            background: rgba(0, 229, 160, 0.15);
+            border: 1px solid rgba(0, 229, 160, 0.3);
+            color: #00E5A0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -256,7 +269,7 @@
         }
 
         .demo-nav-btn:hover {
-            background: rgba(59, 130, 246, 0.3);
+            background: rgba(0, 229, 160, 0.3);
             transform: translateY(-50%) scale(1.1);
         }
 
@@ -352,7 +365,7 @@
             height: 64px;
             background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
             border-radius: 8px;
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(0, 229, 160, 0.3);
             position: relative;
         }
 
@@ -380,7 +393,7 @@
         .signal-ring {
             position: absolute;
             inset: -15px;
-            border: 2px solid #3B82F6;
+            border: 2px solid #00E5A0;
             border-radius: 50%;
             animation: signal-emit 1.5s ease-out infinite;
         }
@@ -396,10 +409,10 @@
             align-items: center;
             gap: 10px;
             padding: 10px 14px;
-            background: rgba(59, 130, 246, 0.05);
+            background: rgba(0, 229, 160, 0.05);
             border-radius: 8px;
             margin-bottom: 8px;
-            border-left: 3px solid #3B82F6;
+            border-left: 3px solid #00E5A0;
             opacity: 0;
             transform: translateX(-20px);
             animation: slide-in 0.5s ease forwards;
@@ -425,39 +438,176 @@
         .demo-container {
             touch-action: pan-y;
         }
+
+        /* Stats number styling */
+        .stat-number {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Badge styling */
+        .badge-label {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        /* Business model layer cards */
+        .business-layer {
+            background: rgba(13, 17, 23, 0.8);
+            border: 1px solid rgba(240, 246, 252, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .business-layer:hover {
+            border-color: rgba(240, 246, 252, 0.15);
+            transform: translateX(8px);
+        }
+
+        /* Why now item styling */
+        .why-now-item {
+            background: #0D1117;
+            border: 1px solid rgba(240, 246, 252, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .why-now-item:hover {
+            border-color: #00E5A0;
+            background: rgba(0, 229, 160, 0.02);
+        }
+
+        .why-now-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 229, 160, 0.08);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Team card styling */
+        .team-card {
+            background: rgba(13, 17, 23, 0.6);
+            border: 1px solid rgba(240, 246, 252, 0.08);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            border-color: rgba(0, 229, 160, 0.3);
+            transform: translateY(-4px);
+        }
+
+        /* Traction card styling */
+        .traction-card {
+            background: rgba(13, 17, 23, 0.6);
+            border: 1px solid rgba(240, 246, 252, 0.08);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .traction-card:hover {
+            border-color: rgba(0, 229, 160, 0.3);
+        }
+
+        /* Market size card */
+        .market-card {
+            background: rgba(13, 17, 23, 0.6);
+            border: 1px solid rgba(240, 246, 252, 0.08);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .market-card:hover {
+            border-color: rgba(240, 246, 252, 0.15);
+        }
+
+        /* Roadmap styling */
+        .roadmap-item {
+            position: relative;
+            padding-left: 32px;
+            padding-bottom: 32px;
+            border-left: 2px solid rgba(240, 246, 252, 0.08);
+        }
+
+        .roadmap-item:last-child {
+            border-left: 2px solid transparent;
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #00E5A0;
+        }
+
+        .roadmap-item.completed::before {
+            background: #00E5A0;
+        }
+
+        .roadmap-item.current::before {
+            background: #0070F3;
+            box-shadow: 0 0 20px rgba(0, 112, 243, 0.5);
+        }
+
+        .roadmap-item.future::before {
+            background: #6E7681;
+        }
     </style>
+<base target="_blank">
 </head>
-<body class="antialiased selection:bg-primary selection:text-white">
+<body class="antialiased selection:bg-emerald selection:text-bgDark">
 
     <!-- Noise Texture -->
     <div class="noise-overlay"></div>
 
     <!-- Background Gradients -->
     <div class="fixed inset-0 z-0 pointer-events-none">
-        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
-        <div class="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px]"></div>
-        <div class="absolute top-[40%] left-[30%] w-[300px] h-[300px] bg-blue-400/5 rounded-full blur-[80px]"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald/10 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-blue/10 rounded-full blur-[100px]"></div>
+        <div class="absolute top-[40%] left-[30%] w-[300px] h-[300px] bg-emerald/5 rounded-full blur-[80px]"></div>
     </div>
 
     <!-- Navbar -->
     <nav class="fixed top-0 w-full z-40 border-b border-white/5 backdrop-blur-md bg-bgDark/70">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2 group">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center text-white font-bold font-display text-xl group-hover:scale-105 transition-transform">H</div>
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald to-blue flex items-center justify-center text-bgDark font-bold font-display text-xl group-hover:scale-105 transition-transform">H</div>
                 <span class="font-display font-bold text-xl tracking-tight text-white">HayatID</span>
             </a>
 
             <div class="hidden md:flex items-center gap-8">
-                <a href="#probleme" class="text-sm text-gray-400 hover:text-primary transition-colors">Le Problème</a>
-                <a href="#solution" class="text-sm text-gray-400 hover:text-primary transition-colors">Solution</a>
-                <a href="#equipe" class="text-sm text-gray-400 hover:text-primary transition-colors">Équipe</a>
+                <a href="#probleme" class="text-sm text-textSecondary hover:text-emerald transition-colors">Le Problème</a>
+                <a href="#solution" class="text-sm text-textSecondary hover:text-emerald transition-colors">Solution</a>
+                <a href="#traction" class="text-sm text-textSecondary hover:text-emerald transition-colors">Traction</a>
+                <a href="#business" class="text-sm text-textSecondary hover:text-emerald transition-colors">Business Model</a>
+                <a href="#equipe" class="text-sm text-textSecondary hover:text-emerald transition-colors">Équipe</a>
             </div>
 
             <div class="flex items-center gap-4">
-                <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-gray-300">
-                    <span>🏆</span> GITEX Africa 2026
+                <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald/10 border border-emerald/30 badge-label text-emerald">
+                    <span>🏆</span> Sélectionné Morocco 300 — GITEX Africa 2026
                 </div>
-                <a href="#waitlist" class="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-bold hover:bg-blue-500 transition-all hover:shadow-[0_0_25px_rgba(59,130,246,0.5)]">
+                <a href="#waitlist" class="px-5 py-2.5 rounded-full bg-emerald text-bgDark text-sm font-bold hover:bg-emeraldDark transition-all hover:shadow-[0_0_25px_rgba(0,229,160,0.5)]">
                     Liste d'attente
                 </a>
             </div>
@@ -467,24 +617,27 @@
     <!-- Hero Section -->
     <section class="relative z-10 pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-            
+
             <div class="reveal space-y-8">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primaryLight text-xs font-medium tracking-wide uppercase">
-                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                    Prochainement au Maroc
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald/30 bg-emerald/10 badge-label text-emerald">
+                    <span class="w-2 h-2 rounded-full bg-emerald animate-pulse"></span>
+                    Sélectionné GITEX Africa 2026 — Morocco 300
                 </div>
-                
-                <h1 class="font-display font-extrabold text-6xl lg:text-8xl leading-[0.9] tracking-tight">
-                    Hayat<br>
-                    <span class="text-gradient">ID</span>
+
+                <h1 class="font-display font-extrabold text-5xl lg:text-7xl leading-[0.9] tracking-tight">
+                    Hayat<span class="text-emerald">ID</span>
                 </h1>
-                
-                <p class="text-xl lg:text-2xl text-gray-400 font-light max-w-lg leading-relaxed">
-                    L'identité médicale <span class="text-white font-medium">portable</span> et <span class="text-white font-medium">sécurisée</span> du Maroc. Accédez à votre dossier médical en un geste.
+
+                <p class="text-xl lg:text-2xl text-textSecondary font-light max-w-lg leading-relaxed">
+                    L'infrastructure médicale qui manque à <span class="text-white font-medium">36 millions</span> de Marocains.
+                </p>
+
+                <p class="text-base text-textSecondary max-w-lg">
+                    Une carte NFC. Un scan. Votre dossier médical sauve des vies — même quand vous ne pouvez pas parler.
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <a href="#waitlist" class="group relative px-8 py-4 rounded-full bg-primary text-white font-bold text-center overflow-hidden shadow-[0_0_30px_rgba(59,130,246,0.3)]">
+                    <a href="#waitlist" class="group relative px-8 py-4 rounded-full bg-emerald text-bgDark font-bold text-center overflow-hidden shadow-[0_0_30px_rgba(0,229,160,0.3)]">
                         <div class="absolute inset-0 w-full h-full bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                         <span class="relative flex items-center justify-center gap-2">
                             Rejoindre la liste d'attente
@@ -492,8 +645,8 @@
                         </span>
                     </a>
                     <button onclick="openDemo()" class="px-8 py-4 rounded-full border border-white/10 bg-white/5 text-white font-medium hover:bg-white/10 transition-colors flex items-center justify-center gap-2 group">
-                        <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i data-lucide="play" class="w-5 h-5 text-primary fill-primary"></i>
+                        <div class="w-10 h-10 rounded-full bg-emerald/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="play" class="w-5 h-5 text-emerald fill-emerald"></i>
                         </div>
                         Voir la démo
                     </button>
@@ -502,58 +655,58 @@
 
             <div class="reveal relative flex items-center justify-center h-[500px] lg:h-[600px]">
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-[300px] h-[300px] border border-blue-500/10 rounded-full absolute"></div>
-                    <div class="w-[450px] h-[450px] border border-blue-500/10 rounded-full absolute"></div>
-                    <div class="w-[600px] h-[600px] border border-dashed border-blue-400/20 rounded-full absolute animate-[spin_60s_linear_infinite]"></div>
+                    <div class="w-[300px] h-[300px] border border-emerald/10 rounded-full absolute"></div>
+                    <div class="w-[450px] h-[450px] border border-emerald/10 rounded-full absolute"></div>
+                    <div class="w-[600px] h-[600px] border border-dashed border-emerald/20 rounded-full absolute animate-[spin_60s_linear_infinite]"></div>
                 </div>
 
                 <div class="relative z-20 w-64 h-[500px] bg-black rounded-[3rem] border-4 border-gray-800 shadow-2xl animate-float overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-b from-gray-900 to-black flex flex-col items-center justify-center p-6">
                         <div class="absolute top-4 w-20 h-6 bg-black rounded-full z-30"></div>
-                        
+
                         <div class="w-full h-full border border-white/10 rounded-2xl bg-surface mt-8 flex flex-col relative overflow-hidden">
                             <div class="p-4 border-b border-white/5 flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <div class="w-8 h-8 rounded-full bg-emerald/20 flex items-center justify-center text-emerald">
                                     <i data-lucide="activity" class="w-4 h-4"></i>
                                 </div>
                                 <div class="h-2 w-20 bg-white/20 rounded-full"></div>
                             </div>
-                            
+
                             <div class="p-4 space-y-3 flex-1">
                                 <div class="h-24 bg-white/5 rounded-xl w-full"></div>
                                 <div class="h-24 bg-white/5 rounded-xl w-full"></div>
                                 <div class="h-24 bg-white/5 rounded-xl w-full"></div>
                             </div>
 
-                            <div class="absolute inset-0 bg-blue-500/10 backdrop-blur-sm flex flex-col items-center justify-center z-10 opacity-0 hover:opacity-100 transition-opacity duration-500 cursor-pointer group">
-                                <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white mb-4 shadow-[0_0_40px_rgba(59,130,246,0.8)]">
+                            <div class="absolute inset-0 bg-emerald/10 backdrop-blur-sm flex flex-col items-center justify-center z-10 opacity-0 hover:opacity-100 transition-opacity duration-500 cursor-pointer group">
+                                <div class="w-16 h-16 rounded-full bg-emerald flex items-center justify-center text-bgDark mb-4 shadow-[0_0_40px_rgba(0,229,160,0.8)]">
                                     <i data-lucide="nfc" class="w-8 h-8"></i>
                                 </div>
-                                <span class="text-primaryLight font-bold tracking-wider text-sm">SCANNING...</span>
+                                <span class="text-emerald font-bold tracking-wider text-sm badge-label">SCANNING...</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="absolute z-30 right-4 lg:right-10 top-1/2 -translate-y-1/2 animate-float" style="animation-delay: 1s;">
-                    <div class="w-48 h-32 bg-gradient-to-br from-gray-800 to-black rounded-xl border border-blue-500/20 shadow-2xl p-4 flex flex-col justify-between relative overflow-hidden group">
-                        <div class="absolute -right-10 -top-10 w-20 h-20 bg-primary/30 blur-xl rounded-full group-hover:bg-primary/50 transition-all"></div>
-                        
+                    <div class="w-48 h-32 bg-gradient-to-br from-gray-800 to-black rounded-xl border border-emerald/20 shadow-2xl p-4 flex flex-col justify-between relative overflow-hidden group">
+                        <div class="absolute -right-10 -top-10 w-20 h-20 bg-emerald/30 blur-xl rounded-full group-hover:bg-emerald/50 transition-all"></div>
+
                         <div class="flex justify-between items-start">
-                            <div class="w-8 h-5 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-sm"></div>
-                            <i data-lucide="wifi" class="w-5 h-5 text-blue-400/50 rotate-90"></i>
+                            <div class="w-8 h-5 bg-gradient-to-r from-emerald to-blue rounded-sm"></div>
+                            <i data-lucide="wifi" class="w-5 h-5 text-emerald/50 rotate-90"></i>
                         </div>
-                        
+
                         <div>
-                            <div class="text-[10px] text-blue-400/60 uppercase tracking-widest mb-1">Carte Médicale</div>
+                            <div class="text-[10px] text-emerald/60 uppercase tracking-widest mb-1">Carte Médicale</div>
                             <div class="font-display font-bold text-lg text-white tracking-wide">HAYAT ID</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 pointer-events-none">
-                    <div class="absolute inset-0 border border-primary/30 rounded-full animate-pulse-ring"></div>
-                    <div class="absolute inset-0 border border-cyan-500/20 rounded-full animate-pulse-ring" style="animation-delay: 1s;"></div>
+                    <div class="absolute inset-0 border border-emerald/30 rounded-full animate-pulse-ring"></div>
+                    <div class="absolute inset-0 border border-blue/20 rounded-full animate-pulse-ring" style="animation-delay: 1s;"></div>
                 </div>
             </div>
         </div>
@@ -583,12 +736,12 @@
             <!-- SLIDE 1: Introduction -->
             <div class="demo-slide active" data-slide="0">
                 <div class="text-center max-w-2xl">
-                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto rounded-2xl bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center mb-6 md:mb-8 pulse-glow">
-                        <i data-lucide="activity" class="w-8 h-8 md:w-10 md:h-10 text-white"></i>
+                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto rounded-2xl bg-gradient-to-br from-emerald to-blue flex items-center justify-center mb-6 md:mb-8 pulse-glow">
+                        <i data-lucide="activity" class="w-8 h-8 md:w-10 md:h-10 text-bgDark"></i>
                     </div>
                     <h2 class="font-display font-bold text-2xl md:text-4xl mb-4">HayatID en 60 secondes</h2>
-                    <p class="text-gray-400 text-sm md:text-lg mb-6 md:mb-8 px-4">Découvrez comment votre carte médicale portable peut sauver des vies</p>
-                    <button onclick="nextSlide()" class="px-6 py-2.5 md:px-8 md:py-3 rounded-full bg-primary text-white font-bold hover:bg-blue-500 transition-colors flex items-center gap-2 mx-auto text-sm md:text-base">
+                    <p class="text-textSecondary text-sm md:text-lg mb-6 md:mb-8 px-4">Découvrez comment votre carte médicale portable peut sauver des vies</p>
+                    <button onclick="nextSlide()" class="px-6 py-2.5 md:px-8 md:py-3 rounded-full bg-emerald text-bgDark font-bold hover:bg-emeraldDark transition-colors flex items-center gap-2 mx-auto text-sm md:text-base">
                         Commencer
                         <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </button>
@@ -599,15 +752,15 @@
             <div class="demo-slide" data-slide="1">
                 <div class="grid md:grid-cols-2 gap-6 md:gap-12 items-center w-full max-w-4xl">
                     <div class="order-2 md:order-1">
-                        <div class="inline-flex items-center gap-2 text-red-400 text-xs md:text-sm font-medium mb-3 md:mb-4">
+                        <div class="inline-flex items-center gap-2 text-danger text-xs md:text-sm font-medium mb-3 md:mb-4">
                             <i data-lucide="alert-circle" class="w-3 h-3 md:w-4 md:h-4"></i>
                             Scénario d'urgence
                         </div>
                         <h3 class="font-display font-bold text-xl md:text-3xl mb-3 md:mb-4">Un accident arrive</h3>
-                        <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-4 md:mb-6">
+                        <p class="text-textSecondary text-sm md:text-base leading-relaxed mb-4 md:mb-6">
                             Vous êtes victime d'un accident. Vous êtes inconscient. Les secours arrivent mais ne connaissent pas votre groupe sanguin ni vos allergies.
                         </p>
-                        <div class="flex items-center gap-4 text-xs md:text-sm text-gray-500">
+                        <div class="flex items-center gap-4 text-xs md:text-sm text-textTertiary">
                             <div class="flex items-center gap-1 md:gap-2">
                                 <i data-lucide="clock" class="w-3 h-3 md:w-4 md:h-4"></i>
                                 <span>Temps critique</span>
@@ -622,15 +775,15 @@
                         <div class="demo-phone">
                             <div class="demo-screen flex items-center justify-center">
                                 <div class="text-center">
-                                    <div class="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-red-500/20 flex items-center justify-center mb-3 md:mb-4 animate-pulse">
-                                        <i data-lucide="siren" class="w-6 h-6 md:w-8 md:h-8 text-red-400"></i>
+                                    <div class="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-danger/20 flex items-center justify-center mb-3 md:mb-4 animate-pulse">
+                                        <i data-lucide="siren" class="w-6 h-6 md:w-8 md:h-8 text-danger"></i>
                                     </div>
-                                    <p class="text-[10px] md:text-xs text-gray-500">Appel d'urgence</p>
-                                    <p class="text-lg md:text-2xl font-bold text-white">15</p>
+                                    <p class="text-[10px] md:text-xs text-textTertiary">Appel d'urgence</p>
+                                    <p class="text-lg md:text-2xl font-bold text-white stat-number">15</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="absolute -bottom-4 -right-4 w-16 h-16 md:w-24 md:h-24 bg-red-500/10 rounded-full blur-xl"></div>
+                        <div class="absolute -bottom-4 -right-4 w-16 h-16 md:w-24 md:h-24 bg-danger/10 rounded-full blur-xl"></div>
                     </div>
                 </div>
             </div>
@@ -639,16 +792,16 @@
             <div class="demo-slide" data-slide="2">
                 <div class="text-center w-full max-w-3xl px-4">
                     <h3 class="font-display font-bold text-xl md:text-3xl mb-3 md:mb-4">Un passant scanne votre carte</h3>
-                    <p class="text-gray-400 text-sm md:text-base mb-8 md:mb-12">N'importe quel téléphone avec NFC peut lire votre HayatID. Aucune application requise.</p>
-                    
+                    <p class="text-textSecondary text-sm md:text-base mb-8 md:mb-12">N'importe quel téléphone avec NFC peut lire votre HayatID. Aucune application requise.</p>
+
                     <div class="relative flex justify-center items-center gap-4 md:gap-8">
                         <!-- Phone -->
                         <div class="demo-phone">
                             <div class="demo-screen flex items-center justify-center scan-animation">
                                 <div class="scan-line"></div>
                                 <div class="text-center z-10">
-                                    <i data-lucide="smartphone" class="w-8 h-8 md:w-12 md:h-12 text-primary mx-auto mb-1 md:mb-2"></i>
-                                    <p class="text-[10px] md:text-xs text-primary">En attente...</p>
+                                    <i data-lucide="smartphone" class="w-8 h-8 md:w-12 md:h-12 text-emerald mx-auto mb-1 md:mb-2"></i>
+                                    <p class="text-[10px] md:text-xs text-emerald">En attente...</p>
                                 </div>
                             </div>
                         </div>
@@ -657,16 +810,16 @@
                         <div class="relative w-12 h-12 md:w-20 md:h-20 flex items-center justify-center">
                             <div class="signal-ring"></div>
                             <div class="signal-ring" style="animation-delay: 0.5s"></div>
-                            <i data-lucide="wifi" class="w-5 h-5 md:w-8 md:h-8 text-primary rotate-90"></i>
+                            <i data-lucide="wifi" class="w-5 h-5 md:w-8 md:h-8 text-emerald rotate-90"></i>
                         </div>
 
                         <!-- Card -->
                         <div class="nfc-card-demo card-tap-anim flex flex-col justify-between p-2 md:p-3">
                             <div class="flex justify-between items-start">
-                                <div class="w-4 h-3 md:w-6 md:h-4 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-sm"></div>
-                                <i data-lucide="wifi" class="w-2 h-2 md:w-3 md:h-3 text-blue-400/50 rotate-90"></i>
+                                <div class="w-4 h-3 md:w-6 md:h-4 bg-gradient-to-r from-emerald to-blue rounded-sm"></div>
+                                <i data-lucide="wifi" class="w-2 h-2 md:w-3 md:h-3 text-emerald/50 rotate-90"></i>
                             </div>
-                            <div class="text-[6px] md:text-[8px] text-blue-400/60 uppercase tracking-wider">HayatID</div>
+                            <div class="text-[6px] md:text-[8px] text-emerald/60 uppercase tracking-wider">HayatID</div>
                         </div>
                     </div>
                 </div>
@@ -678,61 +831,61 @@
                     <div class="demo-phone mx-auto">
                         <div class="demo-screen p-3 md:p-4">
                             <div class="flex items-center gap-2 mb-3 md:mb-4 pb-2 md:pb-3 border-b border-white/10">
-                                <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                                    <i data-lucide="shield-check" class="w-3 h-3 md:w-4 md:h-4 text-primary"></i>
+                                <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-emerald/20 flex items-center justify-center">
+                                    <i data-lucide="shield-check" class="w-3 h-3 md:w-4 md:h-4 text-emerald"></i>
                                 </div>
                                 <div>
                                     <p class="text-[10px] md:text-xs text-white font-medium">Profil d'urgence</p>
-                                    <p class="text-[8px] md:text-[10px] text-gray-500">Accès public limité</p>
+                                    <p class="text-[8px] md:text-[10px] text-textTertiary">Accès public limité</p>
                                 </div>
                             </div>
-                            
+
                             <div class="space-y-1.5 md:space-y-2">
                                 <div class="medical-data-row">
-                                    <i data-lucide="droplet" class="w-3 h-3 md:w-4 md:h-4 text-red-400"></i>
+                                    <i data-lucide="droplet" class="w-3 h-3 md:w-4 md:h-4 text-danger"></i>
                                     <div class="flex-1">
-                                        <p class="text-[8px] md:text-[10px] text-gray-500">Groupe sanguin</p>
-                                        <p class="text-xs md:text-sm text-white font-bold">O+</p>
+                                        <p class="text-[8px] md:text-[10px] text-textTertiary">Groupe sanguin</p>
+                                        <p class="text-xs md:text-sm text-white font-bold stat-number">O+</p>
                                     </div>
                                 </div>
                                 <div class="medical-data-row">
-                                    <i data-lucide="alert-triangle" class="w-3 h-3 md:w-4 md:h-4 text-yellow-400"></i>
+                                    <i data-lucide="alert-triangle" class="w-3 h-3 md:w-4 md:h-4 text-orange"></i>
                                     <div class="flex-1">
-                                        <p class="text-[8px] md:text-[10px] text-gray-500">Allergie</p>
+                                        <p class="text-[8px] md:text-[10px] text-textTertiary">Allergie</p>
                                         <p class="text-xs md:text-sm text-white font-bold">Pénicilline</p>
                                     </div>
                                 </div>
                                 <div class="medical-data-row">
-                                    <i data-lucide="pill" class="w-3 h-3 md:w-4 md:h-4 text-blue-400"></i>
+                                    <i data-lucide="pill" class="w-3 h-3 md:w-4 md:h-4 text-blue"></i>
                                     <div class="flex-1">
-                                        <p class="text-[8px] md:text-[10px] text-gray-500">Traitement</p>
+                                        <p class="text-[8px] md:text-[10px] text-textTertiary">Traitement</p>
                                         <p class="text-xs md:text-sm text-white font-bold">Anticoagulant</p>
                                     </div>
                                 </div>
                                 <div class="medical-data-row">
-                                    <i data-lucide="phone" class="w-3 h-3 md:w-4 md:h-4 text-green-400"></i>
+                                    <i data-lucide="phone" class="w-3 h-3 md:w-4 md:h-4 text-emerald"></i>
                                     <div class="flex-1">
-                                        <p class="text-[8px] md:text-[10px] text-gray-500">Contact</p>
+                                        <p class="text-[8px] md:text-[10px] text-textTertiary">Contact</p>
                                         <p class="text-[10px] md:text-xs text-white font-bold">+212 6XX-XXXXXX</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="text-left">
-                        <div class="inline-flex items-center gap-2 text-green-400 text-xs md:text-sm font-medium mb-3 md:mb-4">
+                        <div class="inline-flex items-center gap-2 text-emerald text-xs md:text-sm font-medium mb-3 md:mb-4">
                             <i data-lucide="check-circle" class="w-3 h-3 md:w-4 md:h-4"></i>
                             Informations critiques
                         </div>
                         <h3 class="font-display font-bold text-xl md:text-3xl mb-3 md:mb-4">Les secours agissent</h3>
-                        <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-4 md:mb-6">
+                        <p class="text-textSecondary text-sm md:text-base leading-relaxed mb-4 md:mb-6">
                             En 2 secondes, le personnel médical connaît votre groupe sanguin, vos allergies et vos traitements en cours.
                         </p>
-                        <div class="p-3 md:p-4 rounded-xl bg-primary/10 border border-primary/20">
-                            <p class="text-xs md:text-sm text-primaryLight">
+                        <div class="p-3 md:p-4 rounded-xl bg-emerald/10 border border-emerald/20">
+                            <p class="text-xs md:text-sm text-emerald">
                                 <i data-lucide="clock" class="w-3 h-3 md:w-4 md:h-4 inline mr-1 md:mr-2"></i>
-                                Temps gagné : <strong>15-30 minutes</strong>
+                                Temps gagné : <strong class="stat-number text-emerald">15-30 minutes</strong>
                             </p>
                         </div>
                     </div>
@@ -743,33 +896,33 @@
             <div class="demo-slide" data-slide="4">
                 <div class="text-center w-full max-w-3xl px-4">
                     <h3 class="font-display font-bold text-xl md:text-3xl mb-3 md:mb-4">Le médecin accède au dossier complet</h3>
-                    <p class="text-gray-400 text-sm md:text-base mb-6 md:mb-12">Avec un code OTP envoyé au patient ou tuteur, le médecin obtient l'historique médical complet.</p>
-                    
+                    <p class="text-textSecondary text-sm md:text-base mb-6 md:mb-12">Avec un code OTP envoyé au patient ou tuteur, le médecin obtient l'historique médical complet.</p>
+
                     <div class="grid grid-cols-3 gap-3 md:gap-6">
                         <div class="p-3 md:p-6 rounded-xl md:rounded-2xl bg-white/5 border border-white/10">
-                            <div class="w-8 h-8 md:w-12 md:h-12 mx-auto rounded-full bg-primary/20 flex items-center justify-center mb-2 md:mb-4">
-                                <i data-lucide="smartphone" class="w-4 h-4 md:w-6 md:h-6 text-primary"></i>
+                            <div class="w-8 h-8 md:w-12 md:h-12 mx-auto rounded-full bg-emerald/20 flex items-center justify-center mb-2 md:mb-4">
+                                <i data-lucide="smartphone" class="w-4 h-4 md:w-6 md:h-6 text-emerald"></i>
                             </div>
-                            <p class="text-[10px] md:text-sm text-gray-400">Demande d'accès</p>
+                            <p class="text-[10px] md:text-sm text-textSecondary">Demande d'accès</p>
                         </div>
-                        
+
                         <div class="p-3 md:p-6 rounded-xl md:rounded-2xl bg-white/5 border border-white/10">
-                            <div class="w-8 h-8 md:w-12 md:h-12 mx-auto rounded-full bg-cyan-500/20 flex items-center justify-center mb-2 md:mb-4">
-                                <i data-lucide="message-square" class="w-4 h-4 md:w-6 md:h-6 text-cyan-400"></i>
+                            <div class="w-8 h-8 md:w-12 md:h-12 mx-auto rounded-full bg-blue/20 flex items-center justify-center mb-2 md:mb-4">
+                                <i data-lucide="message-square" class="w-4 h-4 md:w-6 md:h-6 text-blue"></i>
                             </div>
-                            <p class="text-[10px] md:text-sm text-gray-400">OTP par SMS</p>
+                            <p class="text-[10px] md:text-sm text-textSecondary">OTP par SMS</p>
                         </div>
-                        
+
                         <div class="p-3 md:p-6 rounded-xl md:rounded-2xl bg-white/5 border border-white/10">
-                            <div class="w-8 h-8 md:w-12 md:h-12 mx-auto rounded-full bg-green-500/20 flex items-center justify-center mb-2 md:mb-4">
-                                <i data-lucide="folder-open" class="w-4 h-4 md:w-6 md:h-6 text-green-400"></i>
+                            <div class="w-8 h-8 md:w-12 md:h-12 mx-auto rounded-full bg-emerald/20 flex items-center justify-center mb-2 md:mb-4">
+                                <i data-lucide="folder-open" class="w-4 h-4 md:w-6 md:h-6 text-emerald"></i>
                             </div>
-                            <p class="text-[10px] md:text-sm text-gray-400">Dossier complet</p>
+                            <p class="text-[10px] md:text-sm text-textSecondary">Dossier complet</p>
                         </div>
                     </div>
-                    
-                    <div class="mt-6 md:mt-8 p-3 md:p-4 rounded-xl bg-gradient-to-r from-primary/10 to-cyan-500/10 border border-primary/20">
-                        <p class="text-xs md:text-sm text-primaryLight">
+
+                    <div class="mt-6 md:mt-8 p-3 md:p-4 rounded-xl bg-gradient-to-r from-emerald/10 to-blue/10 border border-emerald/20">
+                        <p class="text-xs md:text-sm text-emerald">
                             <i data-lucide="shield" class="w-3 h-3 md:w-4 md:h-4 inline mr-1 md:mr-2"></i>
                             Sécurité maximale : consentement du patient ou urgence vitale
                         </p>
@@ -780,16 +933,16 @@
             <!-- SLIDE 6: Conclusion -->
             <div class="demo-slide" data-slide="5">
                 <div class="text-center max-w-2xl px-4">
-                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mb-6 md:mb-8 pulse-glow">
-                        <i data-lucide="heart-pulse" class="w-8 h-8 md:w-10 md:h-10 text-white"></i>
+                    <div class="w-16 h-16 md:w-20 md:h-20 mx-auto rounded-2xl bg-gradient-to-br from-emerald to-emeraldDark flex items-center justify-center mb-6 md:mb-8 pulse-glow">
+                        <i data-lucide="heart-pulse" class="w-8 h-8 md:w-10 md:h-10 text-bgDark"></i>
                     </div>
                     <h2 class="font-display font-bold text-2xl md:text-4xl mb-3 md:mb-4">HayatID sauve des vies</h2>
-                    <p class="text-gray-400 text-sm md:text-lg mb-6 md:mb-8">
+                    <p class="text-textSecondary text-sm md:text-lg mb-6 md:mb-8">
                         Une carte. Un scan. Toute votre histoire médicale.<br>
                         Rejoignez la révolution de la santé au Maroc.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
-                        <button onclick="closeDemo(); document.getElementById('waitlist').scrollIntoView({behavior: 'smooth'})" class="px-6 py-2.5 md:px-8 md:py-3 rounded-full bg-primary text-white font-bold hover:bg-blue-500 transition-colors text-sm md:text-base">
+                        <button onclick="closeDemo(); document.getElementById('waitlist').scrollIntoView({behavior: 'smooth'})" class="px-6 py-2.5 md:px-8 md:py-3 rounded-full bg-emerald text-bgDark font-bold hover:bg-emeraldDark transition-colors text-sm md:text-base">
                             Rejoindre la liste
                         </button>
                         <button onclick="closeDemo()" class="px-6 py-2.5 md:px-8 md:py-3 rounded-full border border-white/20 text-white font-medium hover:bg-white/5 transition-colors text-sm md:text-base">
@@ -816,60 +969,60 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="reveal space-y-6">
-                    <div class="inline-flex items-center gap-2 text-red-400 font-medium text-sm tracking-wider uppercase">
+                    <div class="inline-flex items-center gap-2 text-danger font-medium text-sm tracking-wider uppercase badge-label">
                         <i data-lucide="alert-triangle" class="w-4 h-4"></i>
                         Le Problème Critique
                     </div>
                     <h2 class="font-display font-bold text-4xl lg:text-5xl leading-tight">
-                        75% des décès au Maroc sont évitables
+                        Des milliers de patients arrivent inconscients aux urgences chaque année
                     </h2>
-                    <p class="text-gray-400 text-lg leading-relaxed">
-                        Chaque année, des milliers de patients arrivent <span class="text-white font-medium">inconscients</span> aux urgences. Le médecin ne sait pas : groupe sanguin, allergies, implants, traitements.
+                    <p class="text-textSecondary text-lg leading-relaxed">
+                        Leur dossier médical est <span class="text-danger">introuvable</span>. Le médecin ne sait pas : groupe sanguin, allergies, implants, traitements.
                     </p>
-                    <p class="text-gray-400 text-lg leading-relaxed">
-                        Ces informations existent — mais sont <span class="text-red-400">inaccessibles en 10 secondes</span>. L'information était là, introuvable.
+                    <p class="text-textSecondary text-lg leading-relaxed">
+                        Ces informations existent — mais sont <span class="text-danger">inaccessibles en 10 secondes</span>. L'information était là, introuvable.
                     </p>
-                    
+
                     <div class="grid grid-cols-2 gap-6 pt-4">
                         <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-                            <div class="text-3xl font-display font-bold text-white mb-1">88%</div>
-                            <div class="text-sm text-gray-500">Population couverte AMO</div>
+                            <div class="stat-number text-3xl text-emerald mb-1">88%</div>
+                            <div class="text-sm text-textSecondary">Population couverte AMO</div>
                         </div>
                         <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-                            <div class="text-3xl font-display font-bold text-white mb-1">0</div>
-                            <div class="text-sm text-gray-500">Solution terrain médical</div>
+                            <div class="stat-number text-3xl text-white mb-1">0</div>
+                            <div class="text-sm text-textSecondary">Solution d'identité médicale portable déployée au Maroc</div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="reveal relative">
-                    <div class="absolute inset-0 bg-red-500/20 blur-3xl rounded-full"></div>
+                    <div class="absolute inset-0 bg-danger/20 blur-3xl rounded-full"></div>
                     <div class="relative glass-card rounded-3xl p-8 space-y-6">
                         <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 shrink-0">
+                            <div class="w-10 h-10 rounded-full bg-danger/20 flex items-center justify-center text-danger shrink-0">
                                 <i data-lucide="clock" class="w-5 h-5"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-white mb-1">Temps perdu</h4>
-                                <p class="text-sm text-gray-400">15-30 minutes pour retrouver des antécédents papier ou appeler la famille.</p>
+                                <h4 class="font-display font-semibold text-white mb-1">Temps perdu</h4>
+                                <p class="text-sm text-textSecondary">15-30 minutes pour retrouver des antécédents papier ou appeler la famille.</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 shrink-0">
+                            <div class="w-10 h-10 rounded-full bg-danger/20 flex items-center justify-center text-danger shrink-0">
                                 <i data-lucide="shield-alert" class="w-5 h-5"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-white mb-1">Risque d'erreur</h4>
-                                <p class="text-sm text-gray-400">Allergie non déclarée = choc anaphylactique. Groupe sanguin inconnu = transfusion impossible.</p>
+                                <h4 class="font-display font-semibold text-white mb-1">Risque d'erreur</h4>
+                                <p class="text-sm text-textSecondary">Allergie non déclarée = choc anaphylactique. Groupe sanguin inconnu = transfusion impossible.</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 shrink-0">
+                            <div class="w-10 h-10 rounded-full bg-danger/20 flex items-center justify-center text-danger shrink-0">
                                 <i data-lucide="file-x" class="w-5 h-5"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-white mb-1">Dossier papier</h4>
-                                <p class="text-sm text-gray-400">Perdu, dégradé, ou laissé à domicile quand l'urgence frappe.</p>
+                                <h4 class="font-display font-semibold text-white mb-1">Dossier papier</h4>
+                                <p class="text-sm text-textSecondary">Perdu, dégradé, ou laissé à domicile quand l'urgence frappe.</p>
                             </div>
                         </div>
                     </div>
@@ -882,153 +1035,407 @@
     <section id="solution" class="relative z-10 py-24">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-                <div class="inline-flex items-center gap-2 text-primaryLight font-medium text-sm tracking-wider uppercase mb-4">
+                <div class="inline-flex items-center gap-2 text-emerald font-medium text-sm tracking-wider uppercase badge-label mb-4">
                     <i data-lucide="zap" class="w-4 h-4"></i>
                     Notre Solution
                 </div>
-                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">HayatID — حياة + ID</h2>
-                <p class="text-gray-400 text-lg">Une carte NFC + QR code. Le passant scanne. En 2 secondes, sans application, sans compte.</p>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">HayatID — <span class="font-arabic text-emerald">حياة</span> + ID</h2>
+                <p class="text-textSecondary text-lg">Une carte NFC + QR code. Le passant scanne. En 2 secondes, sans application, sans compte.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8 mb-20">
-                <div class="reveal group p-8 rounded-3xl glass-card hover:border-primary/30 transition-all duration-300 hover:-translate-y-2">
-                    <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">
+                <div class="reveal group p-8 rounded-3xl glass-card hover:border-emerald/30 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-2xl bg-danger/10 border border-danger/20 flex items-center justify-center text-danger mb-6 group-hover:scale-110 transition-transform">
                         <i data-lucide="siren" class="w-7 h-7"></i>
                     </div>
                     <h3 class="font-display font-bold text-2xl mb-3">Urgence</h3>
-                    <p class="text-gray-400 leading-relaxed">Donnez aux secours un accès instantané à vos allergies et antécédents critiques, même si vous êtes inconscient.</p>
+                    <p class="text-textSecondary leading-relaxed">Donnez aux secours un accès instantané à vos allergies et antécédents critiques, même si vous êtes inconscient.</p>
                 </div>
 
-                <div class="reveal group p-8 rounded-3xl glass-card hover:border-primary/30 transition-all duration-300 hover:-translate-y-2" style="transition-delay: 100ms;">
-                    <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+                <div class="reveal group p-8 rounded-3xl glass-card hover:border-emerald/30 transition-all duration-300 hover:-translate-y-2" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald/10 border border-emerald/20 flex items-center justify-center text-emerald mb-6 group-hover:scale-110 transition-transform">
                         <i data-lucide="shield-check" class="w-7 h-7"></i>
                     </div>
                     <h3 class="font-display font-bold text-2xl mb-3">Contrôle</h3>
-                    <p class="text-gray-400 leading-relaxed">Vous gardez la main sur vos données. Choisissez ce qui est visible et qui peut y accéder à chaque scan.</p>
+                    <p class="text-textSecondary leading-relaxed">Vous gardez la main sur vos données. Choisissez ce qui est visible et qui peut y accéder à chaque scan.</p>
                 </div>
 
-                <div class="reveal group p-8 rounded-3xl glass-card hover:border-primary/30 transition-all duration-300 hover:-translate-y-2" style="transition-delay: 200ms;">
-                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+                <div class="reveal group p-8 rounded-3xl glass-card hover:border-emerald/30 transition-all duration-300 hover:-translate-y-2" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 rounded-2xl bg-blue/10 border border-blue/20 flex items-center justify-center text-blue mb-6 group-hover:scale-110 transition-transform">
                         <i data-lucide="smartphone-nfc" class="w-7 h-7"></i>
                     </div>
                     <h3 class="font-display font-bold text-2xl mb-3">Portabilité</h3>
-                    <p class="text-gray-400 leading-relaxed">Votre dossier médical vous suit partout. Plus besoin de cartons papier qui s'égarent entre les hôpitaux.</p>
+                    <p class="text-textSecondary leading-relaxed">Votre dossier médical vous suit partout. Plus besoin de cartons papier qui s'égarent entre les hôpitaux.</p>
                 </div>
             </div>
 
             <div class="reveal grid md:grid-cols-3 gap-8 relative">
-                <div class="absolute top-8 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent hidden md:block"></div>
-                
+                <div class="absolute top-8 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-emerald/30 to-transparent hidden md:block"></div>
+
                 <div class="relative text-center">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-bgDark border-2 border-primary flex items-center justify-center text-primary font-display font-bold text-xl mb-4 relative z-10">1</div>
-                    <h4 class="font-bold text-white mb-2">Scan</h4>
-                    <p class="text-sm text-gray-400">Un passant scanne votre carte NFC avec son téléphone. Zéro application requise.</p>
+                    <div class="w-16 h-16 mx-auto rounded-full bg-bgDark border-2 border-emerald flex items-center justify-center text-emerald font-mono font-bold text-xl mb-4 relative z-10 stat-number">1</div>
+                    <h4 class="font-display font-semibold text-white mb-2">Scan</h4>
+                    <p class="text-sm text-textSecondary">Un passant scanne votre carte NFC avec son téléphone. Zéro application requise.</p>
                 </div>
-                
+
                 <div class="relative text-center">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-bgDark border-2 border-primary flex items-center justify-center text-primary font-display font-bold text-xl mb-4 relative z-10">2</div>
-                    <h4 class="font-bold text-white mb-2">Accès</h4>
-                    <p class="text-sm text-gray-400">Groupe sanguin, allergies, contact urgence s'affichent instantanément.</p>
+                    <div class="w-16 h-16 mx-auto rounded-full bg-bgDark border-2 border-emerald flex items-center justify-center text-emerald font-mono font-bold text-xl mb-4 relative z-10 stat-number">2</div>
+                    <h4 class="font-display font-semibold text-white mb-2">Accès</h4>
+                    <p class="text-sm text-textSecondary">Groupe sanguin, allergies, contact urgence s'affichent instantanément.</p>
                 </div>
-                
+
                 <div class="relative text-center">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-bgDark border-2 border-primary flex items-center justify-center text-primary font-display font-bold text-xl mb-4 relative z-10">3</div>
-                    <h4 class="font-bold text-white mb-2">Dossier Complet</h4>
-                    <p class="text-sm text-gray-400">Le médecin utilise un OTP en 15 secondes pour accéder au dossier médical complet.</p>
+                    <div class="w-16 h-16 mx-auto rounded-full bg-bgDark border-2 border-emerald flex items-center justify-center text-emerald font-mono font-bold text-xl mb-4 relative z-10 stat-number">3</div>
+                    <h4 class="font-display font-semibold text-white mb-2">Dossier Complet</h4>
+                    <p class="text-sm text-textSecondary">Le médecin utilise un OTP en 15 secondes pour accéder au dossier médical complet.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Team Section -->
+    <!-- NEW SECTION: Traction & Validation -->
+    <section id="traction" class="relative z-10 py-24 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="inline-flex items-center gap-2 text-emerald font-medium text-sm tracking-wider uppercase badge-label mb-4">
+                    <i data-lucide="trending-up" class="w-4 h-4"></i>
+                    Traction & Validation
+                </div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Déjà en mouvement</h2>
+                <p class="text-textSecondary text-lg">Validation terrain et premiers partenariats en cours</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6 mb-12">
+                <div class="reveal traction-card">
+                    <div class="stat-number text-4xl md:text-5xl text-emerald mb-2">17</div>
+                    <p class="text-sm text-textSecondary uppercase tracking-wider">Experts médicaux consultés</p>
+                </div>
+                <div class="reveal traction-card" style="transition-delay: 100ms;">
+                    <div class="stat-number text-4xl md:text-5xl text-blue mb-2">3</div>
+                    <p class="text-sm text-textSecondary uppercase tracking-wider">Hôpitaux pilotes en discussion</p>
+                </div>
+                <div class="reveal traction-card" style="transition-delay: 200ms;">
+                    <div class="stat-number text-4xl md:text-5xl text-orange mb-2">300+</div>
+                    <p class="text-sm text-textSecondary uppercase tracking-wider">Inscrits liste d'attente</p>
+                </div>
+                <div class="reveal traction-card" style="transition-delay: 300ms;">
+                    <div class="stat-number text-4xl md:text-5xl text-emerald mb-2">1</div>
+                    <p class="text-sm text-textSecondary uppercase tracking-wider">Sélection Morocco 300 GITEX</p>
+                </div>
+            </div>
+
+            <!-- Validation Logos/Partners -->
+            <div class="reveal glass-card rounded-2xl p-8">
+                <p class="text-center text-textTertiary text-sm uppercase tracking-wider mb-6">Validation & Partenariats</p>
+                <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+                    <div class="flex items-center gap-2 text-textSecondary">
+                        <i data-lucide="building-2" class="w-6 h-6 text-emerald"></i>
+                        <span class="font-medium">Enactus FSJES UCA</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-textSecondary">
+                        <i data-lucide="stethoscope" class="w-6 h-6 text-emerald"></i>
+                        <span class="font-medium">Réseau CHU Marrakech</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-textSecondary">
+                        <i data-lucide="award" class="w-6 h-6 text-emerald"></i>
+                        <span class="font-medium">GITEX Africa 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Business Model -->
+    <section id="business" class="relative z-10 py-24 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="inline-flex items-center gap-2 text-emerald font-medium text-sm tracking-wider uppercase badge-label mb-4">
+                    <i data-lucide="layers" class="w-4 h-4"></i>
+                    Modèle Économique
+                </div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-2">La carte est l'interface.</h2>
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-emerald">L'infrastructure est le produit.</h2>
+                <p class="text-textSecondary text-lg mt-6">HayatID n'est pas un gadget NFC — c'est le protocole d'identité médicale qui manque au système de santé marocain.</p>
+            </div>
+
+            <div class="space-y-6 reveal">
+                <!-- Layer 1 -->
+                <div class="business-layer border-l-4 border-emerald">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="badge-label text-emerald">Couche 1</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl text-white mb-2">Standard inter-hospitalier</h3>
+                    <p class="text-textSecondary text-sm mb-3">API et protocole d'échange de données médicales entre institutions. SaaS B2B facturé par établissement connecté.</p>
+                    <p class="text-emerald text-xs font-medium uppercase tracking-wider">→ Revenus récurrents</p>
+                </div>
+
+                <!-- Layer 2 -->
+                <div class="business-layer border-l-4 border-blue">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="badge-label text-blue">Couche 2</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl text-white mb-2">Testament médical digital</h3>
+                    <p class="text-textSecondary text-sm mb-3">Chaque citoyen contrôle ses directives médicales anticipées et son dossier d'urgence via la carte HayatID.</p>
+                    <p class="text-blue text-xs font-medium uppercase tracking-wider">→ Adoption patient, effet réseau</p>
+                </div>
+
+                <!-- Layer 3 -->
+                <div class="business-layer border-l-4 border-orange">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="badge-label text-orange">Couche 3</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl text-white mb-2">Intégration assureurs</h3>
+                    <p class="text-textSecondary text-sm mb-3">Les assureurs accèdent (avec consentement) à des données structurées pour le tiers-payant automatisé.</p>
+                    <p class="text-orange text-xs font-medium uppercase tracking-wider">→ Monétisation premium</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Market Size -->
+    <section id="marche" class="relative z-10 py-24 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="inline-flex items-center gap-2 text-emerald font-medium text-sm tracking-wider uppercase badge-label mb-4">
+                    <i data-lucide="globe" class="w-4 h-4"></i>
+                    Opportunité
+                </div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Un marché de <span class="text-emerald">36 millions</span> de patients</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="reveal market-card">
+                    <div class="stat-number text-3xl md:text-4xl text-emerald mb-2">$3.2B</div>
+                    <p class="text-sm text-textTertiary uppercase tracking-wider">TAM — Healthtech MENA 2026</p>
+                </div>
+                <div class="reveal market-card" style="transition-delay: 100ms;">
+                    <div class="stat-number text-3xl md:text-4xl text-blue mb-2">6.2M</div>
+                    <p class="text-sm text-textTertiary uppercase tracking-wider">Passages urgences/an au Maroc</p>
+                </div>
+                <div class="reveal market-card" style="transition-delay: 200ms;">
+                    <div class="stat-number text-3xl md:text-4xl text-orange mb-2">$1.4B</div>
+                    <p class="text-sm text-textTertiary uppercase tracking-wider">Budget digitalisation santé — Plan Santé 2025</p>
+                </div>
+            </div>
+
+            <p class="text-center text-textTertiary text-sm italic reveal">
+                Sources : OMS EMRO, Ministère de la Santé du Maroc, rapports sectoriels Healthtech MENA. Chiffres arrondis.
+            </p>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Why Now -->
+    <section id="pourquoi" class="relative z-10 py-24 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="inline-flex items-center gap-2 text-emerald font-medium text-sm tracking-wider uppercase badge-label mb-4">
+                    <i data-lucide="clock" class="w-4 h-4"></i>
+                    Le Timing Parfait
+                </div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Pourquoi <span class="text-emerald">maintenant</span> ?</h2>
+            </div>
+
+            <div class="space-y-4 reveal">
+                <!-- Item 1 -->
+                <div class="why-now-item flex items-start gap-4">
+                    <div class="why-now-icon">
+                        <i data-lucide="heart-pulse" class="w-6 h-6 text-emerald"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-semibold text-lg text-white mb-1">AMO Généralisée — 88% de couverture</h4>
+                        <p class="text-textSecondary text-sm">Pour la première fois, la majorité des Marocains ont une assurance maladie. L'infrastructure d'identité médicale est le chaînon manquant.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="why-now-item flex items-start gap-4">
+                    <div class="why-now-icon">
+                        <i data-lucide="smartphone" class="w-6 h-6 text-emerald"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-semibold text-lg text-white mb-1">NFC natif sur 78% des smartphones</h4>
+                        <p class="text-textSecondary text-sm">La technologie est déjà dans la poche de la majorité. Zéro infrastructure à déployer côté patient.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="why-now-item flex items-start gap-4">
+                    <div class="why-now-icon">
+                        <i data-lucide="landmark" class="w-6 h-6 text-emerald"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-semibold text-lg text-white mb-1">Plan Santé 2025 — Digitalisation en cours</h4>
+                        <p class="text-textSecondary text-sm">Le Ministère investit massivement dans la digitalisation. Le DMP national est annoncé mais pas déployé. La fenêtre est ouverte.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="why-now-item flex items-start gap-4">
+                    <div class="why-now-icon">
+                        <i data-lucide="shield" class="w-6 h-6 text-emerald"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-semibold text-lg text-white mb-1">Loi 09-08 / CNDP — Cadre légal existant</h4>
+                        <p class="text-textSecondary text-sm">Le Maroc dispose d'un cadre de protection des données de santé. Nous ne créons pas le cadre, nous nous y inscrivons.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Roadmap -->
+    <section id="roadmap" class="relative z-10 py-24 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="inline-flex items-center gap-2 text-emerald font-medium text-sm tracking-wider uppercase badge-label mb-4">
+                    <i data-lucide="map" class="w-4 h-4"></i>
+                    Feuille de Route
+                </div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Notre trajectoire</h2>
+            </div>
+
+            <div class="reveal">
+                <!-- Q1 2026 -->
+                <div class="roadmap-item completed">
+                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2">
+                        <span class="badge-label text-emerald">Q1 2026</span>
+                        <span class="text-white font-display font-semibold">GITEX Africa & Validation</span>
+                    </div>
+                    <p class="text-textSecondary text-sm pl-0 md:pl-24">Présentation au GITEX Africa 2026. Validation technique avec 3 hôpitaux pilotes. Lancement liste d'attente.</p>
+                </div>
+
+                <!-- Q2 2026 -->
+                <div class="roadmap-item current">
+                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2">
+                        <span class="badge-label text-blue">Q2 2026</span>
+                        <span class="text-white font-display font-semibold">Beta fermée — Marrakech</span>
+                    </div>
+                    <p class="text-textSecondary text-sm pl-0 md:pl-24">Déploiement beta avec 500 patients. Intégration CHU Mohammed VI. Tests terrain en conditions réelles.</p>
+                </div>
+
+                <!-- Q3 2026 -->
+                <div class="roadmap-item future">
+                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2">
+                        <span class="badge-label text-textTertiary">Q3 2026</span>
+                        <span class="text-white font-display font-semibold">Expansion nationale</span>
+                    </div>
+                    <p class="text-textSecondary text-sm pl-0 md:pl-24">Partenariats avec CNSS/AMO. Déploiement dans 5 régions. Lancement API inter-hospitalier.</p>
+                </div>
+
+                <!-- Q4 2026 -->
+                <div class="roadmap-item future">
+                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2">
+                        <span class="badge-label text-textTertiary">Q4 2026</span>
+                        <span class="text-white font-display font-semibold">Intégration assureurs</span>
+                    </div>
+                    <p class="text-textSecondary text-sm pl-0 md:pl-24">Premiers contrats avec assureurs privés. Tiers-payant automatisé. 10,000+ cartes actives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section (Updated with correct names and credibility lines) -->
     <section id="equipe" class="relative z-10 py-24 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Équipe 2KS</h2>
-                <p class="text-gray-400">Enactus FSJES UCA Marrakech — 17 experts consultés</p>
+                <div class="inline-flex items-center gap-2 text-emerald font-medium text-sm tracking-wider uppercase badge-label mb-4">
+                    <i data-lucide="users" class="w-4 h-4"></i>
+                    Équipe 2KS
+                </div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Les fondateurs</h2>
+                <p class="text-textSecondary">Enactus FSJES UCA Marrakech — 17 experts consultés</p>
             </div>
 
-            <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="p-6 rounded-2xl glass-card text-center hover:border-primary/30 transition-colors">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
+            <div class="reveal grid md:grid-cols-3 gap-6">
+                <!-- CEO -->
+                <div class="team-card">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-emerald/10 flex items-center justify-center text-emerald mb-4">
                         <i data-lucide="crown" class="w-8 h-8"></i>
                     </div>
-                    <h4 class="font-bold text-white">CEO</h4>
-                    <p class="text-xs text-gray-500 mt-1">Lamani Mohamed Nacer</p>
+                    <div class="badge-label text-emerald mb-2">Co-fondateur & CEO</div>
+                    <h4 class="font-display font-semibold text-xl text-white mb-2">Lamani Mohamed Nacer</h4>
+                    <p class="text-sm text-textSecondary">Management International — FSJES UCA Marrakech<br>Stratégie, partenariats & vision produit</p>
                 </div>
-                
-                <div class="p-6 rounded-2xl glass-card text-center hover:border-primary/30 transition-colors">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-4">
-                        <i data-lucide="code" class="w-8 h-8"></i>
-                    </div>
-                    <h4 class="font-bold text-white">CTO</h4>
-                    <p class="text-xs text-gray-500 mt-1">Direction Technique</p>
-                </div>
-                
-                <div class="p-6 rounded-2xl glass-card text-center hover:border-primary/30 transition-colors">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-4">
+
+                <!-- CMO -->
+                <div class="team-card">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-blue/10 flex items-center justify-center text-blue mb-4">
                         <i data-lucide="megaphone" class="w-8 h-8"></i>
                     </div>
-                    <h4 class="font-bold text-white">CMO</h4>
-                    <p class="text-xs text-gray-500 mt-1">Marketing & Pharmacien</p>
+                    <div class="badge-label text-blue mb-2">Co-fondatrice & CMO</div>
+                    <h4 class="font-display font-semibold text-xl text-white mb-2">Ennaim Kaoutar</h4>
+                    <p class="text-sm text-textSecondary">Pharmacienne & Marketing<br>Crédibilité terrain santé + stratégie go-to-market</p>
                 </div>
-                
-                <div class="p-6 rounded-2xl glass-card text-center hover:border-primary/30 transition-colors">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 mb-4">
-                        <i data-lucide="wallet" class="w-8 h-8"></i>
+
+                <!-- COO -->
+                <div class="team-card">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-orange/10 flex items-center justify-center text-orange mb-4">
+                        <i data-lucide="settings" class="w-8 h-8"></i>
                     </div>
-                    <h4 class="font-bold text-white">CFO</h4>
-                    <p class="text-xs text-gray-500 mt-1">Finance & Opérations</p>
+                    <div class="badge-label text-orange mb-2">Co-fondatrice & COO</div>
+                    <h4 class="font-display font-semibold text-xl text-white mb-2">Erraoudi Kenza</h4>
+                    <p class="text-sm text-textSecondary">Opérations & exécution<br>Coordination équipe & logistique terrain</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Waitlist Section -->
+    <!-- Waitlist Section (with social proof counter) -->
     <section id="waitlist" class="relative z-10 py-24">
         <div class="max-w-4xl mx-auto px-6">
             <div class="reveal relative rounded-[2.5rem] bg-gradient-to-b from-white/5 to-transparent border border-white/10 p-8 md:p-16 text-center overflow-hidden">
-                
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-primary/10 blur-3xl -z-10"></div>
+
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-emerald/10 blur-3xl -z-10"></div>
 
                 <h2 class="font-display font-bold text-3xl md:text-5xl mb-6">Soyez parmi les premiers</h2>
-                <p class="text-gray-400 mb-10 max-w-lg mx-auto">Inscrivez-vous pour recevoir une invitation exclusive à l'ouverture de HayatID et bénéficier d'avantages early-adopter.</p>
+                <p class="text-textSecondary mb-4 max-w-lg mx-auto">Inscrivez-vous pour recevoir une invitation exclusive à l'ouverture de HayatID et bénéficier d'avantages early-adopter.</p>
+
+                <!-- Social Proof Counter -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald/10 border border-emerald/20 mb-8">
+                    <i data-lucide="users" class="w-4 h-4 text-emerald"></i>
+                    <span class="text-emerald font-medium text-sm">Rejoignez les <span class="stat-number text-emerald">300+</span> inscrits</span>
+                </div>
 
                 <form class="max-w-md mx-auto relative" onsubmit="event.preventDefault(); alert('Merci ! Vous êtes sur la liste.');">
                     <div class="relative flex items-center">
-                        <input type="email" placeholder="Votre adresse email" class="w-full bg-black/50 border border-white/10 rounded-full py-4 pl-6 pr-36 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all">
-                        <button type="submit" class="absolute right-1.5 top-1.5 bottom-1.5 bg-primary hover:bg-blue-500 text-white font-bold px-6 rounded-full transition-colors shadow-[0_0_20px_rgba(59,130,246,0.4)]">
-                            Je m'inscris
+                        <input type="email" placeholder="Votre adresse email" class="w-full bg-black/50 border border-white/10 rounded-full py-4 pl-6 pr-40 text-white placeholder-textTertiary focus:outline-none focus:border-emerald/50 focus:ring-1 focus:ring-emerald/50 transition-all">
+                        <button type="submit" class="absolute right-1.5 top-1.5 bottom-1.5 bg-emerald hover:bg-emeraldDark text-bgDark font-bold px-6 rounded-full transition-colors shadow-[0_0_20px_rgba(0,229,160,0.4)]">
+                            Rejoindre la liste d'attente
                         </button>
                     </div>
-                    <p class="text-xs text-gray-600 mt-4">Pas de spam. Désinscription possible à tout moment.</p>
+                    <p class="text-xs text-textTertiary mt-4">Pas de spam. Désinscription possible à tout moment.</p>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer (Updated with investor contact) -->
     <footer class="relative z-10 border-t border-white/5 bg-black/40 backdrop-blur-lg pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
                 <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 rounded bg-primary flex items-center justify-center text-white font-bold text-xs">H</div>
-                    <span class="font-display font-bold text-lg">HayatID</span>
+                    <div class="w-6 h-6 rounded bg-emerald flex items-center justify-center text-bgDark font-bold text-xs">H</div>
+                    <span class="font-display font-bold text-lg text-white">HayatID</span>
                 </div>
-                
+
+                <div class="flex items-center gap-6">
+                    <a href="mailto:invest@hayatid.info" class="text-sm text-textSecondary hover:text-emerald transition-colors flex items-center gap-2">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        invest@hayatid.info
+                    </a>
+                </div>
+
                 <div class="flex gap-6">
-                    <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-primary transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-textTertiary hover:text-emerald transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-textTertiary hover:text-emerald transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-textTertiary hover:text-emerald transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
                 </div>
             </div>
-            
-            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-600">
+
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-textTertiary">
                 <p>&copy; 2026 HayatID. Tous droits réservés.</p>
                 <div class="flex gap-6">
-                    <a href="#" class="hover:text-gray-400 transition-colors">Confidentialité</a>
-                    <a href="#" class="hover:text-gray-400 transition-colors">Conditions</a>
-                    <span class="text-primary/50 font-mono">2KS</span>
+                    <span class="text-emerald/50 font-mono">2KS — Enactus FSJES UCA</span>
                 </div>
             </div>
         </div>
@@ -1095,10 +1502,10 @@
             // Update dots
             document.querySelectorAll('.slide-dot').forEach((dot, index) => {
                 if (index === currentSlide) {
-                    dot.classList.add('bg-primary', 'w-4', 'md:w-6');
+                    dot.classList.add('bg-emerald', 'w-4', 'md:w-6');
                     dot.classList.remove('bg-white/30');
                 } else {
-                    dot.classList.remove('bg-primary', 'w-4', 'md:w-6');
+                    dot.classList.remove('bg-emerald', 'w-4', 'md:w-6');
                     dot.classList.add('bg-white/30');
                 }
             });
@@ -1110,7 +1517,7 @@
             // Update nav button visibility
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
-            
+
             if (currentSlide === 0) {
                 prevBtn.style.opacity = '0.3';
                 prevBtn.style.pointerEvents = 'none';
@@ -1130,7 +1537,7 @@
 
         // Touch swipe support for mobile
         const demoContainer = document.querySelector('.demo-container');
-        
+
         demoContainer.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
         }, {passive: true});
@@ -1143,7 +1550,7 @@
         function handleSwipe() {
             const swipeThreshold = 50;
             const diff = touchStartX - touchEndX;
-            
+
             if (Math.abs(diff) > swipeThreshold) {
                 if (diff > 0) {
                     // Swipe left - next slide
@@ -1158,7 +1565,7 @@
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (!document.getElementById('demoModal').classList.contains('active')) return;
-            
+
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
             if (e.key === 'Escape') closeDemo();
